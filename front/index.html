@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>COPPER PRO — Медное оборудование и посуда</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="images/cat-1.jpg" type="image/x-icon">
+</head>
+<body>
+
+  <!-- 1. Хедер (Header) -->
+  <header class="site-header">
+    <div class="header-topbar">
+      <div class="container topbar-content">
+        <div class="topbar-contacts">
+          <span>Киев, Бажана 8-Б</span>
+          <a href="tel:+380969906756">+38 (096) 990 67 56</a>
+          <a href="mailto:a.alambik@gmail.com">a.alambik@gmail.com</a>
+        </div>
+        <div class="topbar-info">
+          <span>Бесплатная доставка по всему миру при заказе от 5 000 грн</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-main">
+      <div class="container header-row">
+        <!-- Логотип -->
+        <a href="#" class="header-logo">
+          <div class="logo-text">COPPER <span>PRO</span></div>
+        </a>
+
+        <!-- Навигация -->
+        <nav class="header-nav">
+          <ul>
+            <li><a href="#catalog" class="active">Каталог</a></li>
+            <li><a href="#new-arrivals">Новости</a></li>
+            <li><a href="#benefits">Доставка</a></li>
+            <li><a href="#reviews">О нас</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+
+        <!-- Действия (Поиск, Избранное, Профиль, Корзина) -->
+        <div class="header-actions">
+          <!-- Избранное -->
+          <button class="action-btn" id="wishlist-btn" title="Список желаемого" onclick="window.location.href='#recommended'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge-counter" id="wishlist-count" style="display: none;">0</span>
+          </button>
+
+          <!-- Авторизация / Профиль -->
+          <button class="action-btn" id="auth-btn" title="Личный кабинет">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+
+          <!-- Корзина -->
+          <button class="action-btn" id="cart-btn" title="Корзина">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-counter" id="cart-count" style="display: none;">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Главный экран (Hero Section) -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="hero-badge">ХИТ ПРОДАЖ</span>
+          <h1 class="hero-title">Дистиллятор для эфирных масел</h1>
+          <div class="hero-price-row">
+            <span class="price-label">Цена</span>
+            <span class="price-value">4 906 грн</span>
+          </div>
+          <div class="hero-buttons">
+            <button class="btn-copper" onclick="window.addCardToCart({ id: 1, title: 'Дистиллятор для эфирных масел', price: 4906, image_url: 'images/hero-distiller.jpg' })">
+              Купить
+            </button>
+            <a href="#catalog" class="btn-secondary">В каталог</a>
+          </div>
+          <div class="hero-dots">
+            <span class="dot"></span>
+            <span class="dot active"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-bg-text">COPPER PRO</div>
+          <div class="hero-image-wrapper">
+            <img src="images/hero-distiller.jpg" alt="Дистиллятор для эфирных масел Copper Pro">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Категории ("НАША ПРОДУКЦИЯ") -->
+    <section class="categories-section" id="catalog">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Наша продукция</h2>
+          <p class="section-subtitle">Профессиональное медное оборудование ручной работы для дома и мастерских</p>
+        </div>
+        <!-- Заполняется динамически через GET /api/categories -->
+        <div class="categories-grid" id="categories-grid">
+          <!-- Dynamic cards from API -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Лучшие продажи ("ЛУЧШИЕ ПРОДАЖИ") -->
+    <section class="products-section bg-light" id="best-sellers">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Лучшие продажи</h2>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-arrow prev" onclick="showToast('Предыдущие товары')" title="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-arrow next" onclick="showToast('Следующие товары')" title="Вперед">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <!-- Заполняется динамически через GET /api/products?badge=hit -->
+        <div class="products-grid" id="best-sellers-grid">
+          <!-- Dynamic product cards -->
+        </div>
+        <div class="section-footer-cta">
+          <a href="#catalog" class="btn-copper">Перейти в каталог</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Новинки ("НОВИНКИ") -->
+    <section class="products-section" id="new-arrivals">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Новинки</h2>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-arrow prev" onclick="showToast('Предыдущие новинки')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-arrow next" onclick="showToast('Следующие новинки')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <!-- Заполняется динамически через GET /api/products?badge=new -->
+        <div class="products-grid" id="new-arrivals-grid">
+          <!-- Dynamic product cards -->
+        </div>
+        <div class="section-footer-cta">
+          <a href="#catalog" class="btn-copper">Перейти в каталог</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Промо баннер ("1 + 1 = 3") -->
+    <section class="promo-banner-section">
+      <div class="container banner-grid">
+        <div class="banner-content">
+          <div class="banner-headline">1 + 1 = 3</div>
+          <div class="banner-subhead">Закажите два товара и получите третий бесплатно</div>
+          <a href="#catalog" class="btn-copper">Перейти в каталог</a>
+        </div>
+        <div class="banner-image-box">
+          <img src="images/banner-promo.jpg" alt="Акция 1+1=3 Copper Pro">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Мы рекомендуем ("МЫ РЕКОМЕНДУЕМ") -->
+    <section class="products-section bg-light" id="recommended">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Мы рекомендуем</h2>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-arrow prev" onclick="showToast('Предыдущие рекомендации')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-arrow next" onclick="showToast('Следующие рекомендации')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <!-- Заполняется динамически через GET /api/products?badge=recommended -->
+        <div class="products-grid" id="recommended-grid">
+          <!-- Dynamic product cards -->
+        </div>
+        <div class="section-footer-cta">
+          <a href="#catalog" class="btn-copper">Перейти в каталог</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Скидки ("СКИДКИ") -->
+    <section class="products-section" id="discounts">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Скидки</h2>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-arrow prev" onclick="showToast('Предыдущие скидки')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-arrow next" onclick="showToast('Следующие скидки')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <!-- Заполняется динамически через GET /api/products?badge=sale -->
+        <div class="products-grid" id="discounts-grid">
+          <!-- Dynamic product cards -->
+        </div>
+        <div class="section-footer-cta">
+          <a href="#catalog" class="btn-copper">Перейти в каталог</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Отзывы ("ЧТО ДУМАЮТ О НАС") -->
+    <section class="reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Что думают о нас</h2>
+        </div>
+        <!-- Заполняется динамически через GET /api/reviews -->
+        <div class="reviews-grid" id="reviews-grid">
+          <!-- Dynamic reviews -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Преимущества ("ПОЧЕМУ ВЫБИРАЮТ НАС" - 8 карточек) -->
+    <section class="benefits-section" id="benefits">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Почему выбирают нас</h2>
+        </div>
+        <!-- Заполняется динамически через GET /api/benefits -->
+        <div class="benefits-grid" id="benefits-grid">
+          <!-- Dynamic 8 benefit cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FAQ ("Часто задаваемые вопросы") -->
+    <section class="faq-section" id="faq">
+      <div class="container faq-container">
+        <div class="section-header">
+          <h2 class="section-title">Часто задаваемые вопросы</h2>
+          <p class="section-subtitle">Ответы на популярные вопросы о продукции, доставке и гарантии</p>
+        </div>
+        <!-- Заполняется динамически через GET /api/faq с интерактивным аккордеоном -->
+        <div class="faq-list" id="faq-list">
+          <!-- Dynamic accordion items -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Контактная форма ("ОБРАТНАЯ СВЯЗЬ" - POST запрос) -->
+    <section class="contact-section" id="contacts">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Обратная связь</h2>
+          <p class="section-subtitle">Оставьте ваш вопрос или пожелание, и наши мастера ответят в течение 30 минут</p>
+        </div>
+        <div class="contact-wrapper">
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Имя</label>
+                <input type="text" id="contact-name" placeholder="Введите ваше имя" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" placeholder="Введите ваш Email" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-subject">Тема обращения</label>
+                <input type="text" id="contact-subject" placeholder="Укажите контекст / вопрос">
+              </div>
+              <div class="form-group">
+                <label for="contact-category">Категория вопроса</label>
+                <select id="contact-category">
+                  <option value="Консультация">Консультация по дистилляторам</option>
+                  <option value="Индивидуальный заказ">Индивидуальный заказ</option>
+                  <option value="Доставка и оплата">Доставка и оплата</option>
+                  <option value="Сервис и гарантия">Сервис и гарантия</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Сообщение</label>
+              <textarea id="contact-message" placeholder="Напишите ваш вопрос здесь..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit-contact">Отправить сообщение</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 13. Футер (Footer) -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Бренд и копирайт -->
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">COPPER <span>PRO</span></a>
+        <p class="footer-desc">
+          Производство и поставка премиального медного оборудования, аламбиков и аутентичной медной посуды высшей пробы.
+        </p>
+        <p class="copyright">© 2021 Copper Pro. Все права защищены</p>
+      </div>
+
+      <!-- Меню Навигация -->
+      <div class="footer-col">
+        <div class="col-title">Навигация</div>
+        <ul>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#new-arrivals">Новости</a></li>
+          <li><a href="#benefits">Доставка</a></li>
+          <li><a href="#reviews">О нас</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+
+      <!-- Меню Каталог -->
+      <div class="footer-col">
+        <div class="col-title">Каталог</div>
+        <ul>
+          <li><a href="#catalog">Для эфирных масел</a></li>
+          <li><a href="#catalog">Для гидролатов</a></li>
+          <li><a href="#catalog">Медная посуда</a></li>
+          <li><a href="#catalog">Аксессуары из меди</a></li>
+          <li><a href="#catalog">Индивидуальный заказ</a></li>
+          <li><a href="#discounts">Скидки и предложения</a></li>
+        </ul>
+      </div>
+
+      <!-- Контакты -->
+      <div class="footer-col">
+        <div class="col-title">Контакты</div>
+        <div class="footer-contacts-list">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Бажана 8-Б, Киев, 02132 Украина</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>+38 (096) 990 67 56</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>a.alambik@gmail.com</span>
+          </div>
+
+          <div class="social-links">
+            <a href="#" title="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div class="footer-links">
+        <a href="#">Политика конфиденциальности</a>
+      </div>
+      <div>Сделано с любовью к медным традициям</div>
+    </div>
+  </footer>
+
+  <!-- 14. Плавающая кнопка "ВВЕРХ" -->
+  <button class="btn-back-to-top" id="btn-back-to-top" title="Наверх">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    <span>ВВЕРХ</span>
+  </button>
+
+  <!-- 15. Корзина (Slide-over Cart Drawer) -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer">
+      <div class="drawer-header">
+        <h3>Ваша корзина</h3>
+        <button class="btn-close-drawer" id="btn-close-cart">✕</button>
+      </div>
+      <div class="drawer-body" id="cart-drawer-body">
+        <!-- Rendered items in cart -->
+      </div>
+      <div class="drawer-footer">
+        <div class="total-row">
+          <span>Итого к оплате:</span>
+          <strong id="cart-total-price">0 грн</strong>
+        </div>
+        <button class="btn-copper btn-checkout" id="btn-checkout">Оформить заказ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. Модальное окно оформления заказа (POST /api/orders) -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Оформление заказа</h3>
+        <button class="btn-close-modal" id="btn-close-checkout">✕</button>
+      </div>
+      <div class="modal-body">
+        <form class="auth-form" id="checkout-form">
+          <div class="form-group">
+            <label for="order-name">ФИО получателя *</label>
+            <input type="text" id="order-name" placeholder="Иван Иванов" required>
+          </div>
+          <div class="form-group">
+            <label for="order-email">Email для чека *</label>
+            <input type="email" id="order-email" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="order-phone">Телефон *</label>
+            <input type="tel" id="order-phone" placeholder="+38 (099) 000-00-00" required>
+          </div>
+          <div class="form-group">
+            <label for="order-address">Адрес доставки</label>
+            <input type="text" id="order-address" placeholder="Город, отделение Новой Почты или адрес">
+          </div>
+          <button type="submit" class="btn-copper btn-auth-submit">Подтвердить заказ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. Модальное окно авторизации и регистрации (POST /api/auth/*) -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Вход в аккаунт</h3>
+        <button class="btn-close-modal" id="btn-close-auth">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Вкладки -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login">Вход</button>
+          <button class="auth-tab" id="tab-register">Регистрация</button>
+        </div>
+
+        <!-- Форма Входа -->
+        <form class="auth-form" id="form-login">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="Ваш email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Пароль</label>
+            <input type="password" id="login-password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn-copper btn-auth-submit">Войти</button>
+        </form>
+
+        <!-- Форма Регистрации (bcryptjs на бэке) -->
+        <form class="auth-form" id="form-register" style="display: none;">
+          <div class="form-group">
+            <label for="reg-name">Ваше имя</label>
+            <input type="text" id="reg-name" placeholder="Иван" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Пароль (от 6 символов)</label>
+            <input type="password" id="reg-password" minlength="6" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn-copper btn-auth-submit">Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 18. Контейнер всплывающих уведомлений (Toasts) -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Скрипты: Axios + API + Логика -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
